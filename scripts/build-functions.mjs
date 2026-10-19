@@ -1,0 +1,15 @@
+import { build } from 'esbuild';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { mkdir,copyFile } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const functions=resolve(root,'rayfin/functions');
+const {generateFunctionsTypes}=await import(new URL('../node_modules/@microsoft/rayfin-cli/dist/utils/functions-types-generator.js',import.meta.url));
+await generateFunctionsTypes(functions);
+const check=spawnSync(process.execPath,[resolve(root,'node_modules/typescript/bin/tsc'),'--noEmit','-p',resolve(functions,'tsconfig.json')],{stdio:'inherit'});
+if(check.status)process.exit(check.status);
+await build({entryPoints:[resolve(functions,'src/function_app.ts')],outfile:resolve(functions,'dist/src/function_app.js'),bundle:true,platform:'node',target:'node22',format:'esm',external:['@microsoft/fabric-user-data-functions']});
+await mkdir(resolve(functions,'dist'),{recursive:true});
+await copyFile(resolve(functions,'runtimemetadata.json'),resolve(functions,'dist/runtimemetadata.json'));
+console.log('Functions bundle includes decision-core and Zod; runtime metadata generated from source.');

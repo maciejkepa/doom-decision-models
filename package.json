@@ -1,0 +1,58 @@
+{
+  "name": "doom-decision-1-foundry",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:fabric": "vite --mode fabric --host 127.0.0.1",
+    "build": "npm run typecheck && vite build && node scripts/build-server.mjs",
+    "start": "node --env-file-if-exists=.env.local dist-server/index.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "node scripts/clean.mjs",
+    "build:engine": "node scripts/build-engine.mjs",
+    "build:fabric": "node scripts/build-fabric.mjs",
+    "deploy:fabric": "node scripts/deploy-fabric.mjs",
+    "test": "vitest run",
+    "smoke": "playwright test",
+    "smoke:foundry": "tsx scripts/smoke-foundry.ts",
+    "smoke:live": "node scripts/smoke-live.mjs",
+    "smoke:interactions": "node scripts/smoke-interactions.mjs",
+    "smoke:keys": "node scripts/smoke-interactions.mjs --keys",
+    "evaluate:decisions": "tsx scripts/evaluate-decisions.ts",
+    "evaluate:interactions": "tsx scripts/evaluate-decisions.ts --interactions",
+    "evaluate:combat": "tsx scripts/evaluate-decisions.ts --combat",
+    "evaluate:search": "tsx scripts/evaluate-decisions.ts --search",
+    "evaluate:navigation": "tsx scripts/evaluate-decisions.ts --navigation",
+    "evaluate:keys": "tsx scripts/evaluate-decisions.ts --keys",
+    "verify:assets": "node scripts/verify-assets.mjs",
+    "verify:packages": "node scripts/verify-packages.mjs",
+    "package:engine-source": "node scripts/package-engine-source.mjs"
+  },
+  "dependencies": {
+    "@azure/identity": "^4.13.0",
+    "@microsoft/rayfin-auth-provider-fabric": "1.36.2",
+    "@microsoft/rayfin-client": "1.36.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@microsoft/fabric-user-data-functions": "1.36.2",
+    "@microsoft/rayfin-cli": "1.36.2",
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "esbuild": "^0.25.0",
+    "fflate": "0.8.3",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0",
+    "vitest": "^5.0.5"
+  }
+}

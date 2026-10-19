@@ -1,0 +1,276 @@
+{
+  "source": "live-foundry",
+  "time": "2026-10-19T09:40:25.090Z",
+  "request": {
+    "model": "Decision-1",
+    "state": {
+      "gameTic": 100,
+      "player": {
+        "health": 100,
+        "armor": 0,
+        "weapon": "pistol",
+        "weaponAmmo": 50,
+        "weaponRange": "ranged",
+        "ammunition": {
+          "bullets": 50,
+          "shells": 0,
+          "cells": 0,
+          "rockets": 0
+        },
+        "ownedWeapons": [
+          "fist",
+          "pistol"
+        ],
+        "keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "headingDegrees": 0
+      },
+      "visibleEnemies": [],
+      "enemyAim": [],
+      "visibleItems": [],
+      "omittedVisibleObjects": 0,
+      "interactionSurfaces": [],
+      "omittedInteractionSurfaces": 0,
+      "lastUse": null,
+      "localPassages": {
+        "ahead": "blocked",
+        "left": "open",
+        "right": "blocked",
+        "behind": "open",
+        "forwardClearanceUnits": 16,
+        "rearClearanceUnits": 256
+      },
+      "navigation": [
+        {
+          "direction": "back_right",
+          "bearingDegrees": -135,
+          "clearanceUnits": 16,
+          "nearbyUsableSurface": false
+        },
+        {
+          "direction": "right",
+          "bearingDegrees": -90,
+          "clearanceUnits": 16,
+          "nearbyUsableSurface": false
+        },
+        {
+          "direction": "front_right",
+          "bearingDegrees": -45,
+          "clearanceUnits": 16,
+          "nearbyUsableSurface": false
+        },
+        {
+          "direction": "ahead",
+          "bearingDegrees": 0,
+          "clearanceUnits": 16,
+          "nearbyUsableSurface": false
+        },
+        {
+          "direction": "front_left",
+          "bearingDegrees": 45,
+          "clearanceUnits": 256,
+          "nearbyUsableSurface": false
+        },
+        {
+          "direction": "left",
+          "bearingDegrees": 90,
+          "clearanceUnits": 256,
+          "nearbyUsableSurface": false
+        },
+        {
+          "direction": "back_left",
+          "bearingDegrees": 135,
+          "clearanceUnits": 256,
+          "nearbyUsableSurface": false
+        },
+        {
+          "direction": "behind",
+          "bearingDegrees": 180,
+          "clearanceUnits": 256,
+          "nearbyUsableSurface": false
+        }
+      ],
+      "recentActions": [
+        {
+          "action": "movement: advance | view: hold | action: hold",
+          "healthDelta": 0,
+          "ammoDelta": 0,
+          "distance": 0,
+          "angleDelta": 0
+        },
+        {
+          "action": "movement: advance | view: hold | action: hold",
+          "healthDelta": 0,
+          "ammoDelta": 0,
+          "distance": 0,
+          "angleDelta": 0
+        },
+        {
+          "action": "movement: advance | view: hold | action: hold",
+          "healthDelta": 0,
+          "ammoDelta": 0,
+          "distance": 0,
+          "angleDelta": 0
+        }
+      ],
+      "recentEvents": [],
+      "exploration": {
+        "visitedCells": 1,
+        "currentVisits": 1,
+        "recentCells": [
+          "0,0"
+        ],
+        "knownPassages": [],
+        "stuck": true,
+        "blockedMoves": 3,
+        "sinceProgressTics": 90,
+        "turnWithoutProgress": 0,
+        "headingVisits": [
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "recentlySeenEnemies": []
+      },
+      "headingMemory": [
+        {
+          "worldHeading": 0,
+          "relativeBearing": 0,
+          "observations": 8
+        },
+        {
+          "worldHeading": 45,
+          "relativeBearing": 45,
+          "observations": 0
+        },
+        {
+          "worldHeading": 90,
+          "relativeBearing": 90,
+          "observations": 0
+        },
+        {
+          "worldHeading": 135,
+          "relativeBearing": 135,
+          "observations": 0
+        },
+        {
+          "worldHeading": 180,
+          "relativeBearing": -180,
+          "observations": 0
+        },
+        {
+          "worldHeading": 225,
+          "relativeBearing": -135,
+          "observations": 0
+        },
+        {
+          "worldHeading": 270,
+          "relativeBearing": -90,
+          "observations": 0
+        },
+        {
+          "worldHeading": 315,
+          "relativeBearing": -45,
+          "observations": 0
+        }
+      ]
+    },
+    "questions": {
+      "movement": {
+        "type": "choice",
+        "instructions": "Choose translation ONLY. View and action are chosen separately and execute simultaneously: retreating does not require stopping fire. Survive, explore and reach the exit. Never repeat forward movement against a blocked wall or after blockedMoves >= 2. Hold translation while the view turns toward a new opening, or retreat/strafe through known clear space. If a close centered enemy threatens you, evade through a clear rear/side passage. For a nearby closed usable door, hold while action uses it; hold while an opening door is still impassable, advance when passable. Approach distant doors/items only through clear space. Do not charge an enemy or revisit the same failed displacement. Stuck is feedback, not permission to invent a route.",
+        "criteria": {
+          "hold": "Stay in place while looking, aiming, using or waiting. Also when all translations are blocked.",
+          "advance": "Walk forward into OPEN space or a passable door. Wrong for a blocked front or repeated failed forward moves.",
+          "retreat": "Back away through OPEN rear space, especially from a close threat. Action can still fire.",
+          "strafe_left": "Translate LEFT through clear side space. Does not rotate; action can still fire.",
+          "strafe_right": "Translate RIGHT through clear side space. Does not rotate; action can still fire."
+        }
+      },
+      "view": {
+        "type": "choice",
+        "instructions": "Choose camera rotation ONLY, independently of translation and firing. Positive bearings mean LEFT; negative mean RIGHT. Aim at a visible enemy or a nearby interaction surface: 3.5-degree corrections for errors under 10 degrees, 14-degree turns for larger errors. When there is no enemy, actively inspect unobserved headings and side openings rather than staring at a wall. If blockedMoves >= 2, rotate 45 degrees toward an open side or an unobserved heading. A side passage 90 degrees away needs more than one 45-degree turn. If taking damage with no enemy visible, search by turning toward a recently seen enemy's LAST KNOWN bearing, or scan unobserved headings. Memory can be stale: enemies may move or die. Avoid endless circles: heading observations and turnWithoutProgress describe repeated looking without travel. Hold the view while a faced door opens or a centered target is being fired at.",
+        "criteria": {
+          "hold": "Keep heading when aim is centered, waiting for a door, or walking a clear corridor already inspected.",
+          "aim_left": "Fine aim LEFT +3.5 degrees for a small positive target bearing under +10 degrees.",
+          "aim_right": "Fine aim RIGHT -3.5 degrees for a small negative target bearing over -10 degrees.",
+          "turn_left": "Turn LEFT +14 degrees toward a visible off-center target or nearby left-facing surface.",
+          "turn_right": "Turn RIGHT -14 degrees toward a visible off-center target or nearby right-facing surface.",
+          "turn_left_large": "Look LEFT +45 degrees to inspect a side opening, search an unseen heading or escape staring at a wall. Do not hold the view against a blocked front.",
+          "turn_right_large": "Look RIGHT -45 degrees to inspect a side opening, search an unseen heading or escape staring at a wall. Do not hold the view against a blocked front."
+        }
+      },
+      "action": {
+        "type": "choice",
+        "instructions": "Choose equipment/interaction/fire ONLY. Movement and view are independent and happen simultaneously. Fire with usable ammunition at a visible enemy near the crosshair, including while retreating or strafing; never wait to lose health or walk up to a distant gunman. A modest simultaneous view correction can accompany fire; a far off-center or merely remembered enemy needs searching/aiming first. Use once when a ready door/switch has canUseNow=true and no missing key. Do not repeatedly use an opening door: that can close it. Wait while an opening door is impassable or just after triggering a switch; movement and view should hold to deliberately wait 600 ms. Move through once passable. keyAvailable=false means search for the key, not use/wait repeatedly. Equip an owned weapon only when useful; equipping the current weapon achieves nothing.",
+        "criteria": {
+          "hold": "Release action inputs when no visible target is aligned and no interaction is ready. Movement/view can still explore or search.",
+          "fire": "Shoot a visible enemy near the crosshair NOW, even at long range and full health. Keep firing while the separate movement retreats or strafes.",
+          "use": "Activate a ready door or switch ONCE when the use ray reaches it and a required key is not missing. Do not use an opening or already activated surface.",
+          "wait": "Let an impassable OPENING door or newly triggered mechanism evolve. Choose hold movement and hold view for a deliberate 600 ms wait. Never wait for a missing key.",
+          "equip_fist": "Equip fist. Only when it improves on the equipped weapon.",
+          "equip_pistol": "Equip pistol. Only when it improves on the equipped weapon."
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "microsoft-decision-1",
+    "answers": {
+      "action": {
+        "choice": "hold",
+        "confidence": 0.9656719814159253,
+        "probabilities": {
+          "equip_fist": 0.002407843709142607,
+          "equip_pistol": 0.0016548851662980017,
+          "fire": 0.0027284443742416342,
+          "hold": 0.9713933178466044,
+          "use": 0.0016548851662980017,
+          "wait": 0.020160623737415333
+        },
+        "type": "choice"
+      },
+      "movement": {
+        "choice": "strafe_left",
+        "confidence": 0.5340872042414972,
+        "probabilities": {
+          "advance": 0.0078961598293519,
+          "hold": 0.018941907247949804,
+          "retreat": 0.3357532996143839,
+          "strafe_left": 0.6272697633931978,
+          "strafe_right": 0.01013886991511658
+        },
+        "type": "choice"
+      },
+      "view": {
+        "choice": "turn_left_large",
+        "confidence": 0.9856170053262892,
+        "probabilities": {
+          "aim_left": 0.0010205589803098814,
+          "aim_right": 0.00048207792739786377,
+          "hold": 0.0007014192455408284,
+          "turn_left": 0.0009006401390283633,
+          "turn_left_large": 0.9876717188511049,
+          "turn_right": 0.0016826172988409348,
+          "turn_right_large": 0.007540967557777175
+        },
+        "type": "choice"
+      }
+    },
+    "usage": {
+      "input_tokens": 1704,
+      "output_tokens": 3
+    }
+  }
+}

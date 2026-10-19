@@ -1,0 +1,8 @@
+{
+    "files":  {
+                  "freedoom1.wad":  "7323bcc168c5a45ff10749b339960e98314740a734c30d4b9f3337001f9e703d"
+              },
+    "title":  "Freedoom Phase 1",
+    "source":  "https://github.com/freedoom/freedoom/releases/tag/v0.13.0",
+    "version":  "0.13.0"
+}

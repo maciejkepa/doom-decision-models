@@ -1,0 +1,1651 @@
+{
+  "source": "live-foundry",
+  "recordedAt": "2026-10-19T13:38:37.360Z",
+  "promptVersion": "async-6",
+  "samples": [
+    {
+      "channel": "movement",
+      "observation": {
+        "schemaVersion": 4,
+        "episodeId": "f244876e-1a67-4f45-b0a2-0f224225b2dd",
+        "observationId": "1:21",
+        "mapId": "E1M1",
+        "gameTic": 21,
+        "status": "playing",
+        "capturedAtMs": 2310.1,
+        "inputs": [
+          {
+            "channel": "movement",
+            "sequence": 0,
+            "code": 0,
+            "active": false,
+            "appliedTic": 0,
+            "remainingMs": 0,
+            "targetHeading": null,
+            "endReason": "released"
+          },
+          {
+            "channel": "view",
+            "sequence": 0,
+            "code": 0,
+            "active": false,
+            "appliedTic": 0,
+            "remainingMs": 0,
+            "targetHeading": null,
+            "endReason": "released"
+          },
+          {
+            "channel": "action",
+            "sequence": 0,
+            "code": 0,
+            "active": false,
+            "appliedTic": 0,
+            "remainingMs": 0,
+            "targetHeading": null,
+            "endReason": "released"
+          }
+        ],
+        "player": {
+          "health": 100,
+          "armor": 0,
+          "ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "weapon": "pistol",
+          "ownedWeapons": [
+            "fist",
+            "pistol"
+          ],
+          "keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "x": -416,
+          "y": 256,
+          "angle": 0
+        },
+        "objects": [
+          {
+            "id": 5829504,
+            "kind": "item",
+            "type": "BON1",
+            "distance": 273.41,
+            "bearing": -20.56
+          },
+          {
+            "id": 5829864,
+            "kind": "item",
+            "type": "BON1",
+            "distance": 273.41,
+            "bearing": 20.56
+          },
+          {
+            "id": 5829144,
+            "kind": "item",
+            "type": "MEDI",
+            "distance": 500.88,
+            "bearing": 26.57
+          }
+        ],
+        "truncatedObjects": 0,
+        "rays": [
+          {
+            "bearing": -135,
+            "distance": 135.76,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": -90,
+            "distance": 192,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": -45,
+            "distance": 226.27,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 0,
+            "distance": 256,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 45,
+            "distance": 226.27,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 90,
+            "distance": 192,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 135,
+            "distance": 135.76,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 180,
+            "distance": 96,
+            "interaction": "unknown"
+          }
+        ],
+        "interactions": [],
+        "truncatedInteractions": 0,
+        "lastUse": null,
+        "events": [],
+        "history": [],
+        "memory": {
+          "visitedCells": 1,
+          "currentVisits": 1,
+          "recentCells": [
+            "-4,2"
+          ],
+          "knownPassages": [],
+          "stuck": false,
+          "blockedMoves": 0,
+          "sinceProgressTics": 7,
+          "turnWithoutProgress": 0,
+          "headingVisits": [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recentlySeenEnemies": []
+        }
+      },
+      "request": {
+        "model": "Decision-1",
+        "state": {
+          "gameTic": 21,
+          "activeInputs": [
+            {
+              "channel": "movement",
+              "sequence": 0,
+              "code": 0,
+              "active": false,
+              "appliedTic": 0,
+              "remainingMs": 0,
+              "targetHeading": null,
+              "endReason": "released"
+            },
+            {
+              "channel": "view",
+              "sequence": 0,
+              "code": 0,
+              "active": false,
+              "appliedTic": 0,
+              "remainingMs": 0,
+              "targetHeading": null,
+              "endReason": "released"
+            },
+            {
+              "channel": "action",
+              "sequence": 0,
+              "code": 0,
+              "active": false,
+              "appliedTic": 0,
+              "remainingMs": 0,
+              "targetHeading": null,
+              "endReason": "released"
+            }
+          ],
+          "player": {
+            "health": 100,
+            "armor": 0,
+            "weapon": "pistol",
+            "weaponAmmo": 50,
+            "weaponRange": "ranged",
+            "ammunition": {
+              "bullets": 50,
+              "shells": 0,
+              "cells": 0,
+              "rockets": 0
+            },
+            "ownedWeapons": [
+              "fist",
+              "pistol"
+            ],
+            "keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "headingDegrees": 0
+          },
+          "visibleEnemies": [],
+          "enemyAim": [],
+          "visibleItems": [
+            {
+              "id": 5829504,
+              "type": "BON1",
+              "distanceUnits": 273.4,
+              "bearingDegrees": -20.6,
+              "side": "right"
+            },
+            {
+              "id": 5829864,
+              "type": "BON1",
+              "distanceUnits": 273.4,
+              "bearingDegrees": 20.6,
+              "side": "left"
+            },
+            {
+              "id": 5829144,
+              "type": "MEDI",
+              "distanceUnits": 500.9,
+              "bearingDegrees": 26.6,
+              "side": "left"
+            }
+          ],
+          "omittedVisibleObjects": 0,
+          "interactionSurfaces": [],
+          "interactionFacts": {
+            "readyWithinUseRay": [],
+            "openingImpassable": [],
+            "freshActivation": false
+          },
+          "omittedInteractionSurfaces": 0,
+          "lastUse": null,
+          "localPassages": {
+            "ahead": "open",
+            "left": "open",
+            "right": "open",
+            "behind": "open",
+            "forwardClearanceUnits": 256,
+            "rearClearanceUnits": 96
+          },
+          "navigation": [
+            {
+              "direction": "back_right",
+              "bearingDegrees": -135,
+              "clearanceUnits": 135.8,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "right",
+              "bearingDegrees": -90,
+              "clearanceUnits": 192,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "front_right",
+              "bearingDegrees": -45,
+              "clearanceUnits": 226.3,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "ahead",
+              "bearingDegrees": 0,
+              "clearanceUnits": 256,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "front_left",
+              "bearingDegrees": 45,
+              "clearanceUnits": 226.3,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "left",
+              "bearingDegrees": 90,
+              "clearanceUnits": 192,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "back_left",
+              "bearingDegrees": 135,
+              "clearanceUnits": 135.8,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "behind",
+              "bearingDegrees": 180,
+              "clearanceUnits": 96,
+              "nearbyUsableSurface": false
+            }
+          ],
+          "recentActions": [],
+          "recentEvents": [],
+          "exploration": {
+            "visitedCells": 1,
+            "currentVisits": 1,
+            "recentCells": [
+              "-4,2"
+            ],
+            "knownPassages": [],
+            "stuck": false,
+            "blockedMoves": 0,
+            "sinceProgressTics": 7,
+            "turnWithoutProgress": 0,
+            "headingVisits": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "recentlySeenEnemies": []
+          },
+          "headingMemory": [
+            {
+              "worldHeading": 0,
+              "relativeBearing": 0,
+              "observations": 2
+            },
+            {
+              "worldHeading": 45,
+              "relativeBearing": 45,
+              "observations": 0
+            },
+            {
+              "worldHeading": 90,
+              "relativeBearing": 90,
+              "observations": 0
+            },
+            {
+              "worldHeading": 135,
+              "relativeBearing": 135,
+              "observations": 0
+            },
+            {
+              "worldHeading": 180,
+              "relativeBearing": -180,
+              "observations": 0
+            },
+            {
+              "worldHeading": 225,
+              "relativeBearing": -135,
+              "observations": 0
+            },
+            {
+              "worldHeading": 270,
+              "relativeBearing": -90,
+              "observations": 0
+            },
+            {
+              "worldHeading": 315,
+              "relativeBearing": -45,
+              "observations": 0
+            }
+          ]
+        },
+        "questions": {
+          "movement": {
+            "type": "choice",
+            "instructions": "Choose translation ONLY. View and action are chosen separately and execute simultaneously: retreating does not require stopping fire. Survive, explore and reach the exit. If interactionFacts.readyWithinUseRay is nonempty and no immediate enemy threatens you, HOLD while the separate action uses that surface. An interactable door is not an ordinary dead end. Also HOLD for an impassable opening door or a fresh activation under 600 ms old. Advance once passable. Otherwise, never repeat forward movement against a blocked wall or after blockedMoves >= 2. Hold while view turns toward a new opening, or retreat/strafe through clear space. Evade a close threat through a clear rear/side passage. Approach distant doors/items through clear space. Do not charge enemies or repeat failed displacement.",
+            "criteria": {
+              "hold": "Stay in place for a READY surface within the use ray, an impassable OPENING door, or a FRESH activation. Also while looking/aiming, or when translations are blocked.",
+              "advance": "Walk forward into OPEN space or a passable door. Wrong for a blocked front or repeated failed forward moves.",
+              "retreat": "Back away through OPEN rear space, especially from a close threat. Action can still fire.",
+              "strafe_left": "Translate LEFT through clear side space to evade or escape an ordinary wall. Not while activating an already faced door or waiting for opening. Does not rotate.",
+              "strafe_right": "Translate RIGHT through clear side space to evade or escape an ordinary wall. Not while activating an already faced door or waiting for opening. Does not rotate."
+            }
+          }
+        }
+      },
+      "response": {
+        "model": "microsoft-decision-1",
+        "answers": {
+          "movement": {
+            "choice": "advance",
+            "confidence": 0.9065407116657578,
+            "probabilities": {
+              "advance": 0.9252325693326062,
+              "hold": 0.014954990847238817,
+              "retreat": 0.031659715872046974,
+              "strafe_left": 0.013197733100869228,
+              "strafe_right": 0.014954990847238817
+            },
+            "type": "choice"
+          }
+        },
+        "usage": {
+          "input_tokens": 1196,
+          "output_tokens": 1
+        }
+      }
+    },
+    {
+      "channel": "view",
+      "observation": {
+        "schemaVersion": 4,
+        "episodeId": "f244876e-1a67-4f45-b0a2-0f224225b2dd",
+        "observationId": "1:294",
+        "mapId": "E1M1",
+        "gameTic": 294,
+        "status": "playing",
+        "capturedAtMs": 10110.4,
+        "inputs": [
+          {
+            "channel": "movement",
+            "sequence": 14,
+            "code": 3,
+            "active": true,
+            "appliedTic": 278,
+            "remainingMs": 196.3,
+            "targetHeading": null,
+            "endReason": "running"
+          },
+          {
+            "channel": "view",
+            "sequence": 14,
+            "code": 3,
+            "active": false,
+            "appliedTic": 284,
+            "remainingMs": 0,
+            "targetHeading": 44.256,
+            "endReason": "passed"
+          },
+          {
+            "channel": "action",
+            "sequence": 15,
+            "code": 1,
+            "active": true,
+            "appliedTic": 290,
+            "remainingMs": 532.2,
+            "targetHeading": null,
+            "endReason": "running"
+          }
+        ],
+        "player": {
+          "health": 91,
+          "armor": 0,
+          "ammo": [
+            42,
+            0,
+            0,
+            0
+          ],
+          "weapon": "pistol",
+          "ownedWeapons": [
+            "fist",
+            "pistol"
+          ],
+          "keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "x": 698.382,
+          "y": 305.771,
+          "angle": 48.252
+        },
+        "objects": [
+          {
+            "id": 5819784,
+            "kind": "enemy",
+            "type": "POSS",
+            "distance": 71.27,
+            "bearing": -2.76
+          },
+          {
+            "id": 5819964,
+            "kind": "enemy",
+            "type": "POSS",
+            "distance": 91.78,
+            "bearing": -40.03
+          },
+          {
+            "id": 5830404,
+            "kind": "item",
+            "type": "BON1",
+            "distance": 173.22,
+            "bearing": -8.73
+          }
+        ],
+        "truncatedObjects": 0,
+        "rays": [
+          {
+            "bearing": -135,
+            "distance": 113.15,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": -90,
+            "distance": 84.55,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": -45,
+            "distance": 126.78,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 0,
+            "distance": 256,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 45,
+            "distance": 68.82,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 90,
+            "distance": 51.43,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 135,
+            "distance": 256,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 180,
+            "distance": 152.49,
+            "interaction": "unknown"
+          }
+        ],
+        "interactions": [
+          {
+            "id": 577,
+            "kind": "door",
+            "distance": 229.91,
+            "bearing": 15.52,
+            "inReach": false,
+            "canUseNow": false,
+            "activationAvailable": true,
+            "state": "closed",
+            "passable": false,
+            "openingHeight": 0,
+            "requiredKey": null,
+            "keyAvailable": null
+          }
+        ],
+        "truncatedInteractions": 0,
+        "lastUse": null,
+        "events": [
+          {
+            "seq": 14,
+            "tic": 123,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 15,
+            "tic": 130,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 16,
+            "tic": 137,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 17,
+            "tic": 142,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 18,
+            "tic": 149,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 19,
+            "tic": 156,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 20,
+            "tic": 162,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 21,
+            "tic": 167,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 22,
+            "tic": 169,
+            "type": "pickup",
+            "value": 45
+          },
+          {
+            "seq": 23,
+            "tic": 173,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 24,
+            "tic": 179,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 25,
+            "tic": 185,
+            "type": "pickup",
+            "value": 45
+          },
+          {
+            "seq": 26,
+            "tic": 186,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 27,
+            "tic": 192,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 28,
+            "tic": 197,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 29,
+            "tic": 204,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 30,
+            "tic": 210,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 31,
+            "tic": 217,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 32,
+            "tic": 223,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 33,
+            "tic": 229,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 34,
+            "tic": 235,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 35,
+            "tic": 241,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 36,
+            "tic": 245,
+            "type": "damage",
+            "value": 12
+          },
+          {
+            "seq": 37,
+            "tic": 248,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 38,
+            "tic": 253,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 39,
+            "tic": 259,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 40,
+            "tic": 266,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 41,
+            "tic": 273,
+            "type": "applied",
+            "value": 202
+          },
+          {
+            "seq": 42,
+            "tic": 278,
+            "type": "applied",
+            "value": 200
+          },
+          {
+            "seq": 43,
+            "tic": 284,
+            "type": "applied",
+            "value": 201
+          },
+          {
+            "seq": 44,
+            "tic": 289,
+            "type": "pickup",
+            "value": 45
+          },
+          {
+            "seq": 45,
+            "tic": 290,
+            "type": "applied",
+            "value": 202
+          }
+        ],
+        "history": [
+          {
+            "action": "advance",
+            "healthDelta": 0,
+            "ammoDelta": 0,
+            "distance": 41.740755814910635,
+            "angleDelta": 0
+          },
+          {
+            "action": "advance",
+            "healthDelta": 0,
+            "ammoDelta": -1,
+            "distance": 9.443365554716118,
+            "angleDelta": 0
+          },
+          {
+            "action": "advance",
+            "healthDelta": 0,
+            "ammoDelta": 0,
+            "distance": 2.3899999999999864,
+            "angleDelta": 0
+          },
+          {
+            "action": "advance",
+            "healthDelta": -12,
+            "ammoDelta": 0,
+            "distance": 4.9950000000000045,
+            "angleDelta": 0
+          },
+          {
+            "action": "hold",
+            "healthDelta": 0,
+            "ammoDelta": 0,
+            "distance": 0,
+            "angleDelta": 0
+          },
+          {
+            "action": "strafe_left",
+            "healthDelta": 0,
+            "ammoDelta": 0,
+            "distance": 6.158999999999992,
+            "angleDelta": 15.424999999999955
+          }
+        ],
+        "memory": {
+          "visitedCells": 10,
+          "currentVisits": 1,
+          "recentCells": [
+            "-4,2",
+            "-3,2",
+            "-2,2",
+            "-1,2",
+            "0,2",
+            "1,2",
+            "2,2",
+            "3,2",
+            "4,2",
+            "5,2"
+          ],
+          "knownPassages": [
+            "-4,2 -> -3,2",
+            "-3,2 -> -2,2",
+            "-2,2 -> -1,2",
+            "-1,2 -> 0,2",
+            "0,2 -> 1,2",
+            "1,2 -> 2,2",
+            "2,2 -> 3,2",
+            "3,2 -> 4,2",
+            "4,2 -> 5,2"
+          ],
+          "stuck": false,
+          "blockedMoves": 1,
+          "sinceProgressTics": 0,
+          "turnWithoutProgress": 0,
+          "headingVisits": [
+            15,
+            11,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5
+          ],
+          "recentlySeenEnemies": []
+        }
+      },
+      "request": {
+        "model": "Decision-1",
+        "state": {
+          "gameTic": 294,
+          "activeInputs": [
+            {
+              "channel": "movement",
+              "sequence": 14,
+              "code": 3,
+              "active": true,
+              "appliedTic": 278,
+              "remainingMs": 196.3,
+              "targetHeading": null,
+              "endReason": "running"
+            },
+            {
+              "channel": "view",
+              "sequence": 14,
+              "code": 3,
+              "active": false,
+              "appliedTic": 284,
+              "remainingMs": 0,
+              "targetHeading": 44.256,
+              "endReason": "passed"
+            },
+            {
+              "channel": "action",
+              "sequence": 15,
+              "code": 1,
+              "active": true,
+              "appliedTic": 290,
+              "remainingMs": 532.2,
+              "targetHeading": null,
+              "endReason": "running"
+            }
+          ],
+          "player": {
+            "health": 91,
+            "armor": 0,
+            "weapon": "pistol",
+            "weaponAmmo": 42,
+            "weaponRange": "ranged",
+            "ammunition": {
+              "bullets": 42,
+              "shells": 0,
+              "cells": 0,
+              "rockets": 0
+            },
+            "ownedWeapons": [
+              "fist",
+              "pistol"
+            ],
+            "keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "headingDegrees": 48.3
+          },
+          "visibleEnemies": [
+            {
+              "id": 5819784,
+              "type": "POSS",
+              "distanceUnits": 71.3,
+              "bearingDegrees": -2.8,
+              "side": "right"
+            },
+            {
+              "id": 5819964,
+              "type": "POSS",
+              "distanceUnits": 91.8,
+              "bearingDegrees": -40,
+              "side": "right"
+            }
+          ],
+          "enemyAim": [
+            {
+              "id": 5819784,
+              "crosshair": "on target",
+              "targetDirection": "center",
+              "angularErrorDegrees": 2.8
+            },
+            {
+              "id": 5819964,
+              "crosshair": "off target",
+              "targetDirection": "right",
+              "angularErrorDegrees": 40
+            }
+          ],
+          "visibleItems": [
+            {
+              "id": 5830404,
+              "type": "BON1",
+              "distanceUnits": 173.2,
+              "bearingDegrees": -8.7,
+              "side": "right"
+            }
+          ],
+          "omittedVisibleObjects": 0,
+          "interactionSurfaces": [
+            {
+              "id": 577,
+              "kind": "door",
+              "distance": 229.9,
+              "bearing": 15.5,
+              "inReach": false,
+              "canUseNow": false,
+              "activationAvailable": true,
+              "state": "closed",
+              "passable": false,
+              "openingHeight": 0,
+              "requiredKey": "[redacted]",
+              "keyAvailable": "[redacted]",
+              "blockedByMissingKey": "[redacted]"
+            }
+          ],
+          "interactionFacts": {
+            "readyWithinUseRay": [],
+            "openingImpassable": [],
+            "freshActivation": false
+          },
+          "omittedInteractionSurfaces": 0,
+          "lastUse": null,
+          "localPassages": {
+            "ahead": "open",
+            "left": "open",
+            "right": "open",
+            "behind": "open",
+            "forwardClearanceUnits": 256,
+            "rearClearanceUnits": 152.49
+          },
+          "navigation": [
+            {
+              "direction": "back_right",
+              "bearingDegrees": -135,
+              "clearanceUnits": 113.2,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "right",
+              "bearingDegrees": -90,
+              "clearanceUnits": 84.6,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "front_right",
+              "bearingDegrees": -45,
+              "clearanceUnits": 126.8,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "ahead",
+              "bearingDegrees": 0,
+              "clearanceUnits": 256,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "front_left",
+              "bearingDegrees": 45,
+              "clearanceUnits": 68.8,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "left",
+              "bearingDegrees": 90,
+              "clearanceUnits": 51.4,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "back_left",
+              "bearingDegrees": 135,
+              "clearanceUnits": 256,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "behind",
+              "bearingDegrees": 180,
+              "clearanceUnits": 152.5,
+              "nearbyUsableSurface": false
+            }
+          ],
+          "recentActions": [
+            {
+              "action": "advance",
+              "healthDelta": 0,
+              "ammoDelta": 0,
+              "distance": 41.7,
+              "angleDelta": 0
+            },
+            {
+              "action": "advance",
+              "healthDelta": 0,
+              "ammoDelta": -1,
+              "distance": 9.4,
+              "angleDelta": 0
+            },
+            {
+              "action": "advance",
+              "healthDelta": 0,
+              "ammoDelta": 0,
+              "distance": 2.4,
+              "angleDelta": 0
+            },
+            {
+              "action": "advance",
+              "healthDelta": -12,
+              "ammoDelta": 0,
+              "distance": 5,
+              "angleDelta": 0
+            },
+            {
+              "action": "hold",
+              "healthDelta": 0,
+              "ammoDelta": 0,
+              "distance": 0,
+              "angleDelta": 0
+            },
+            {
+              "action": "strafe_left",
+              "healthDelta": 0,
+              "ammoDelta": 0,
+              "distance": 6.2,
+              "angleDelta": 15.424999999999955
+            }
+          ],
+          "recentEvents": [
+            {
+              "seq": 44,
+              "tic": 289,
+              "type": "pickup",
+              "value": 45
+            }
+          ],
+          "exploration": {
+            "visitedCells": 10,
+            "currentVisits": 1,
+            "recentCells": [
+              "-4,2",
+              "-3,2",
+              "-2,2",
+              "-1,2",
+              "0,2",
+              "1,2",
+              "2,2",
+              "3,2",
+              "4,2",
+              "5,2"
+            ],
+            "knownPassages": [
+              "-4,2 -> -3,2",
+              "-3,2 -> -2,2",
+              "-2,2 -> -1,2",
+              "-1,2 -> 0,2",
+              "0,2 -> 1,2",
+              "1,2 -> 2,2",
+              "2,2 -> 3,2",
+              "3,2 -> 4,2",
+              "4,2 -> 5,2"
+            ],
+            "stuck": false,
+            "blockedMoves": 1,
+            "sinceProgressTics": 0,
+            "turnWithoutProgress": 0,
+            "headingVisits": [
+              15,
+              11,
+              0,
+              0,
+              0,
+              0,
+              0,
+              5
+            ],
+            "recentlySeenEnemies": []
+          },
+          "headingMemory": [
+            {
+              "worldHeading": 0,
+              "relativeBearing": -48.25200000000001,
+              "observations": 15
+            },
+            {
+              "worldHeading": 45,
+              "relativeBearing": -3.2519999999999527,
+              "observations": 11
+            },
+            {
+              "worldHeading": 90,
+              "relativeBearing": 41.74800000000005,
+              "observations": 0
+            },
+            {
+              "worldHeading": 135,
+              "relativeBearing": 86.74800000000005,
+              "observations": 0
+            },
+            {
+              "worldHeading": 180,
+              "relativeBearing": 131.74800000000005,
+              "observations": 0
+            },
+            {
+              "worldHeading": 225,
+              "relativeBearing": 176.74800000000005,
+              "observations": 0
+            },
+            {
+              "worldHeading": 270,
+              "relativeBearing": -138.25199999999995,
+              "observations": 0
+            },
+            {
+              "worldHeading": 315,
+              "relativeBearing": -93.25199999999995,
+              "observations": 5
+            }
+          ]
+        },
+        "questions": {
+          "view": {
+            "type": "choice",
+            "instructions": "Choose camera rotation ONLY, independently of translation and firing. Positive bearings mean LEFT; negative mean RIGHT. If interactionFacts.readyWithinUseRay is nonempty and no immediate enemy threatens you, HOLD heading so the separate action can use the surface; rotating would aim away from it. Also HOLD for an impassable opening door or a fresh activation under 600 ms old. Aim at visible enemies or off-axis interaction surfaces: 3.5 degrees for errors under 10, 14 degrees for larger errors. Without a target/active interaction, inspect unobserved headings and side openings. If blockedMoves >= 2 at an ordinary wall, rotate 45 degrees toward an open side or unseen heading. A side passage 90 degrees away needs multiple turns. If damaged with no enemy visible, turn toward a recently seen enemy's LAST KNOWN bearing or scan unseen headings. Memory is stale; enemies may move/die. Avoid endless circles: heading observations and turnWithoutProgress show repeated looking without travel. Hold for a centered visible target.",
+            "criteria": {
+              "face_enemy_5819784": "Face visible enemy 5819784, bearing -2.76 degrees. Snapshot direction only; no tracking. Prefer this exact direction to coarse rotations when aiming at this object.",
+              "face_enemy_5819964": "Face visible enemy 5819964, bearing -40.03 degrees. Snapshot direction only; no tracking. Prefer this exact direction to coarse rotations when aiming at this object.",
+              "face_surface_577": "Face visible door 577, bearing 15.52 degrees. Prefer this exact direction to coarse rotations when aiming at this object.",
+              "hold": "Release rotation for a READY surface within the use ray, an impassable OPENING door, a FRESH activation, a centered visible enemy or a clear corridor already inspected.",
+              "aim_left": "Fine aim LEFT +3.5 degrees for a small positive target bearing under +10 degrees.",
+              "aim_right": "Fine aim RIGHT -3.5 degrees for a small negative target bearing over -10 degrees.",
+              "turn_left": "Turn LEFT +14 degrees toward a visible off-center target or nearby left-facing surface.",
+              "turn_right": "Turn RIGHT -14 degrees toward a visible off-center target or nearby right-facing surface.",
+              "turn_left_large": "Look LEFT +45 degrees to search an unseen heading, inspect a side opening or escape an ordinary wall. Not when already facing a ready/active interaction.",
+              "turn_right_large": "Look RIGHT -45 degrees to search an unseen heading, inspect a side opening or escape an ordinary wall. Not when already facing a ready/active interaction."
+            }
+          }
+        }
+      },
+      "response": {
+        "model": "microsoft-decision-1",
+        "answers": {
+          "view": {
+            "choice": "face_enemy_5819784",
+            "confidence": 0.4858970431961832,
+            "probabilities": {
+              "aim_left": 0.007664275735451303,
+              "aim_right": 0.13585257038447462,
+              "face_enemy_5819784": 0.5373073388765649,
+              "face_enemy_5819964": 0.004648618218042807,
+              "face_surface_577": 0.002488226028028996,
+              "hold": 0.28759989376080736,
+              "turn_left": 0.005968943944444642,
+              "turn_left_large": 0.00281952947454167,
+              "turn_right": 0.01431875215940277,
+              "turn_right_large": 0.0013318514182409334
+            },
+            "type": "choice"
+          }
+        },
+        "usage": {
+          "input_tokens": 2023,
+          "output_tokens": 1
+        }
+      }
+    },
+    {
+      "channel": "action",
+      "observation": {
+        "schemaVersion": 4,
+        "episodeId": "f244876e-1a67-4f45-b0a2-0f224225b2dd",
+        "observationId": "1:14",
+        "mapId": "E1M1",
+        "gameTic": 14,
+        "status": "playing",
+        "capturedAtMs": 2104.1,
+        "inputs": [
+          {
+            "channel": "movement",
+            "sequence": 0,
+            "code": 0,
+            "active": false,
+            "appliedTic": 0,
+            "remainingMs": 0,
+            "targetHeading": null,
+            "endReason": "released"
+          },
+          {
+            "channel": "view",
+            "sequence": 0,
+            "code": 0,
+            "active": false,
+            "appliedTic": 0,
+            "remainingMs": 0,
+            "targetHeading": null,
+            "endReason": "released"
+          },
+          {
+            "channel": "action",
+            "sequence": 0,
+            "code": 0,
+            "active": false,
+            "appliedTic": 0,
+            "remainingMs": 0,
+            "targetHeading": null,
+            "endReason": "released"
+          }
+        ],
+        "player": {
+          "health": 100,
+          "armor": 0,
+          "ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "weapon": "pistol",
+          "ownedWeapons": [
+            "fist",
+            "pistol"
+          ],
+          "keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "x": -416,
+          "y": 256,
+          "angle": 0
+        },
+        "objects": [
+          {
+            "id": 5829504,
+            "kind": "item",
+            "type": "BON1",
+            "distance": 273.41,
+            "bearing": -20.56
+          },
+          {
+            "id": 5829864,
+            "kind": "item",
+            "type": "BON1",
+            "distance": 273.41,
+            "bearing": 20.56
+          },
+          {
+            "id": 5829144,
+            "kind": "item",
+            "type": "MEDI",
+            "distance": 500.88,
+            "bearing": 26.57
+          }
+        ],
+        "truncatedObjects": 0,
+        "rays": [
+          {
+            "bearing": -135,
+            "distance": 135.76,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": -90,
+            "distance": 192,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": -45,
+            "distance": 226.27,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 0,
+            "distance": 256,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 45,
+            "distance": 226.27,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 90,
+            "distance": 192,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 135,
+            "distance": 135.76,
+            "interaction": "unknown"
+          },
+          {
+            "bearing": 180,
+            "distance": 96,
+            "interaction": "unknown"
+          }
+        ],
+        "interactions": [],
+        "truncatedInteractions": 0,
+        "lastUse": null,
+        "events": [],
+        "history": [],
+        "memory": {
+          "visitedCells": 1,
+          "currentVisits": 1,
+          "recentCells": [
+            "-4,2"
+          ],
+          "knownPassages": [],
+          "stuck": false,
+          "blockedMoves": 0,
+          "sinceProgressTics": 0,
+          "turnWithoutProgress": 0,
+          "headingVisits": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recentlySeenEnemies": []
+        }
+      },
+      "request": {
+        "model": "Decision-1",
+        "state": {
+          "gameTic": 14,
+          "activeInputs": [
+            {
+              "channel": "movement",
+              "sequence": 0,
+              "code": 0,
+              "active": false,
+              "appliedTic": 0,
+              "remainingMs": 0,
+              "targetHeading": null,
+              "endReason": "released"
+            },
+            {
+              "channel": "view",
+              "sequence": 0,
+              "code": 0,
+              "active": false,
+              "appliedTic": 0,
+              "remainingMs": 0,
+              "targetHeading": null,
+              "endReason": "released"
+            },
+            {
+              "channel": "action",
+              "sequence": 0,
+              "code": 0,
+              "active": false,
+              "appliedTic": 0,
+              "remainingMs": 0,
+              "targetHeading": null,
+              "endReason": "released"
+            }
+          ],
+          "player": {
+            "health": 100,
+            "armor": 0,
+            "weapon": "pistol",
+            "weaponAmmo": 50,
+            "weaponRange": "ranged",
+            "ammunition": {
+              "bullets": 50,
+              "shells": 0,
+              "cells": 0,
+              "rockets": 0
+            },
+            "ownedWeapons": [
+              "fist",
+              "pistol"
+            ],
+            "keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "headingDegrees": 0
+          },
+          "visibleEnemies": [],
+          "enemyAim": [],
+          "visibleItems": [
+            {
+              "id": 5829504,
+              "type": "BON1",
+              "distanceUnits": 273.4,
+              "bearingDegrees": -20.6,
+              "side": "right"
+            },
+            {
+              "id": 5829864,
+              "type": "BON1",
+              "distanceUnits": 273.4,
+              "bearingDegrees": 20.6,
+              "side": "left"
+            },
+            {
+              "id": 5829144,
+              "type": "MEDI",
+              "distanceUnits": 500.9,
+              "bearingDegrees": 26.6,
+              "side": "left"
+            }
+          ],
+          "omittedVisibleObjects": 0,
+          "interactionSurfaces": [],
+          "interactionFacts": {
+            "readyWithinUseRay": [],
+            "openingImpassable": [],
+            "freshActivation": false
+          },
+          "omittedInteractionSurfaces": 0,
+          "lastUse": null,
+          "localPassages": {
+            "ahead": "open",
+            "left": "open",
+            "right": "open",
+            "behind": "open",
+            "forwardClearanceUnits": 256,
+            "rearClearanceUnits": 96
+          },
+          "navigation": [
+            {
+              "direction": "back_right",
+              "bearingDegrees": -135,
+              "clearanceUnits": 135.8,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "right",
+              "bearingDegrees": -90,
+              "clearanceUnits": 192,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "front_right",
+              "bearingDegrees": -45,
+              "clearanceUnits": 226.3,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "ahead",
+              "bearingDegrees": 0,
+              "clearanceUnits": 256,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "front_left",
+              "bearingDegrees": 45,
+              "clearanceUnits": 226.3,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "left",
+              "bearingDegrees": 90,
+              "clearanceUnits": 192,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "back_left",
+              "bearingDegrees": 135,
+              "clearanceUnits": 135.8,
+              "nearbyUsableSurface": false
+            },
+            {
+              "direction": "behind",
+              "bearingDegrees": 180,
+              "clearanceUnits": 96,
+              "nearbyUsableSurface": false
+            }
+          ],
+          "recentActions": [],
+          "recentEvents": [],
+          "exploration": {
+            "visitedCells": 1,
+            "currentVisits": 1,
+            "recentCells": [
+              "-4,2"
+            ],
+            "knownPassages": [],
+            "stuck": false,
+            "blockedMoves": 0,
+            "sinceProgressTics": 0,
+            "turnWithoutProgress": 0,
+            "headingVisits": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "recentlySeenEnemies": []
+          },
+          "headingMemory": [
+            {
+              "worldHeading": 0,
+              "relativeBearing": 0,
+              "observations": 1
+            },
+            {
+              "worldHeading": 45,
+              "relativeBearing": 45,
+              "observations": 0
+            },
+            {
+              "worldHeading": 90,
+              "relativeBearing": 90,
+              "observations": 0
+            },
+            {
+              "worldHeading": 135,
+              "relativeBearing": 135,
+              "observations": 0
+            },
+            {
+              "worldHeading": 180,
+              "relativeBearing": -180,
+              "observations": 0
+            },
+            {
+              "worldHeading": 225,
+              "relativeBearing": -135,
+              "observations": 0
+            },
+            {
+              "worldHeading": 270,
+              "relativeBearing": -90,
+              "observations": 0
+            },
+            {
+              "worldHeading": 315,
+              "relativeBearing": -45,
+              "observations": 0
+            }
+          ]
+        },
+        "questions": {
+          "action": {
+            "type": "choice",
+            "instructions": "Choose equipment/interaction/fire ONLY. Movement and view are independent and happen simultaneously. Fire with usable ammunition at a visible enemy near the crosshair, including while retreating or strafing; never wait to lose health or walk up to a distant gunman. A modest simultaneous view correction can accompany fire; a far off-center or merely remembered enemy needs searching/aiming first. Use once when a ready door/switch has canUseNow=true and no missing key. Do not repeatedly use an opening door: that can close it. Wait while an opening door is impassable or just after triggering a switch; movement and view should hold to deliberately wait 600 ms. Move through once passable. keyAvailable=false means search for the key, not use/wait repeatedly. Equip an owned weapon only when useful; equipping the current weapon achieves nothing.",
+            "criteria": {
+              "hold": "Release action inputs when no visible target is aligned and no interaction is ready or evolving. If interactionFacts.freshActivation is true or a door is opening but impassable, choose wait instead.",
+              "fire": "Shoot a visible enemy near the crosshair NOW, even at long range and full health. Keep firing while the separate movement retreats or strafes.",
+              "use": "Activate a ready door or switch ONCE when the use ray reaches it and a required key is not missing. Do not use an opening or already activated surface.",
+              "wait": "Wait after interactionFacts.freshActivation=true or for an impassable OPENING door. Let the mechanism evolve for 600 ms with movement/view holding. This takes priority over ordinary idle hold right after an activation. Never wait for a missing key.",
+              "equip_fist": "Equip fist. Only when it improves on the equipped weapon.",
+              "equip_pistol": "Equip pistol. Only when it improves on the equipped weapon."
+            }
+          }
+        }
+      },
+      "response": {
+        "model": "microsoft-decision-1",
+        "answers": {
+          "action": {
+            "choice": "hold",
+            "confidence": 0.9826791351987296,
+            "probabilities": {
+              "equip_fist": 0.0035545065935151244,
+              "equip_pistol": 0.0019025902769250753,
+              "fire": 0.005171776576768295,
+              "hold": 0.9855659459989414,
+              "use": 0.0019025902769250753,
+              "wait": 0.0019025902769250753
+            },
+            "type": "choice"
+          }
+        },
+        "usage": {
+          "input_tokens": 1246,
+          "output_tokens": 1
+        }
+      }
+    }
+  ]
+}

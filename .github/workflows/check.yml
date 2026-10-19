@@ -1,0 +1,28 @@
+name: Checks
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run verify:assets
+      - run: npm test
+      - run: npm run build
+      - run: npm ci --prefix rayfin/functions
+      - run: npm run build:fabric
+      - run: npm run verify:packages
+      - run: npx playwright install --with-deps chromium firefox
+      - run: npm run smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-results
+          path: |
+            test-results
+            artifacts/game-*.png
+            artifacts/decision-panel-*.png

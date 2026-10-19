@@ -1,0 +1,40 @@
+{
+  "source": "live-foundry",
+  "time": "2026-10-18T18:57:30.052Z",
+  "latencyMs": 702.6279,
+  "request": {
+    "model": "Decision-1",
+    "state": {
+      "task": "Connectivity check",
+      "instruction": "Select release to leave the game controls untouched."
+    },
+    "questions": {
+      "action": {
+        "type": "choice",
+        "instructions": "Choose release for this connectivity check.",
+        "criteria": {
+          "release": "Release all controls.",
+          "advance": "Walk forward."
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "microsoft-decision-1",
+    "answers": {
+      "action": {
+        "choice": "advance",
+        "confidence": 0.3027097022606673,
+        "probabilities": {
+          "advance": 0.6513548511303336,
+          "release": 0.34864514886966624
+        },
+        "type": "choice"
+      }
+    },
+    "usage": {
+      "input_tokens": 53,
+      "output_tokens": 1
+    }
+  }
+}

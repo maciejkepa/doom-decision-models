@@ -1,0 +1,25 @@
+id: doom-decision-1-foundry
+name: DOOM Decision-1 on Foundry
+version: 0.1.0
+services:
+  auth:
+    enabled: true
+    allowedRedirectUris:
+      - http://127.0.0.1:5173
+      - http://127.0.0.1:5173/auth/callback
+    fabric:
+      enabled: true
+  data:
+    enabled: false
+  staticHosting:
+    enabled: true
+    folder: dist-fabric
+    buildCommand: npm run build:fabric
+    indexDocument: index.html
+    assetAccess: protected
+  functions:
+    enabled: true
+    path: rayfin/functions
+    auth:
+      type: application
+    buildCommand: npm run build

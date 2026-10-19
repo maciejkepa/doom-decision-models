@@ -1,0 +1,10 @@
+{
+  "bridgeVersion": "bridge-9",
+  "upstream": "e257a09527062bfb986b6e5e0780839b6cbd5b71",
+  "emscripten": "4.0.10",
+  "files": {
+    "doom.js": "0e6f99ab655c14d5e6c8bf80f3e0d528fe25aafcbd3064b65f5ced363387d96e",
+    "doom.wasm": "01a5a92482585c79c5b9fec69773416621c8fbfa665fc74a1c1de074d30e7a8a",
+    "source.zip": "d08cc4f9996f88b90e81744263899d503a3542a42cb75fd60f7ba016da1ef570"
+  }
+}

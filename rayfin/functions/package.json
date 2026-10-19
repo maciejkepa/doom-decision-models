@@ -1,0 +1,6 @@
+{
+  "name": "doom-decision-functions", "version": "0.1.0", "private": true, "type": "module",
+  "main": "dist/src/function_app.js",
+  "scripts": { "build": "node ../../scripts/build-functions.mjs" },
+  "dependencies": { "@microsoft/fabric-user-data-functions": "1.36.2" }
+}
