@@ -1,0 +1,5 @@
+# Keep checksummed artifacts identical on Windows and Unix checkouts.
+/public/engine/doom.js text eol=lf
+/public/engine/*.wasm -text
+/public/engine/*.zip -text
+/public/assets/*.wad -text

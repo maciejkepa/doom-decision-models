@@ -28,5 +28,8 @@ const windows=process.platform==='win32';
 const python=process.env.EMSDK_PYTHON||join(emsdk,'python/3.13.3_64bit/python.exe');
 const result=spawnSync(windows?python:'emcc',windows?[join(emsdk,'upstream/emscripten/emcc.py'),...args]:args,{stdio:'inherit',env:{...process.env,EMSDK:emsdk,EMSDK_PYTHON:python}});
 if(result.error)throw result.error;if(result.status)process.exit(result.status);
+// Emscripten on Windows can emit CRLF. Hash the same LF bytes Git distributes.
+const javascript=resolve('public/engine/doom.js');
+await writeFile(javascript,(await readFile(javascript,'utf8')).replaceAll('\r\n','\n'));
 const files={};for(const file of ['doom.js','doom.wasm'])files[file]=createHash('sha256').update(await readFile('public/engine/'+file)).digest('hex');
 await writeFile('public/engine/manifest.json',JSON.stringify({bridgeVersion:'bridge-9',upstream:'e257a09527062bfb986b6e5e0780839b6cbd5b71',emscripten:'4.0.10',files},null,2)+'\n');
