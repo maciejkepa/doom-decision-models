@@ -2,11 +2,11 @@
 
 Microsoft Decision-1 controls a full Doom level running in your browser. Watch the game, model option probabilities, observations, executed actions and latency in one view.
 
-**Verified locally:** custom Doom WASM, full Freedoom E1M1, live Microsoft-Decision-1 inference including simultaneous movement/turning/fire, Chromium and Firefox. **Fabric:** integration and build are provided. Remote deployment has not been verified. Navigation can still loop and combat decisions can fail. The model has not completed the level in verification. See [verification results](docs/verification.md).
+The application combines a custom Doom WASM engine, Freedoom E1M1 and Microsoft-Decision-1 inference, with independent movement, view and action channels. It includes a local Node API and Microsoft Fabric integration. Browser compatibility and inference test results are documented in [verification results](docs/verification.md).
 
 ## Quickstart
 
-Requirements: Node.js **24**, npm, a modern browser, internet access and a Microsoft-Decision-1 deployment in Microsoft Foundry. The engine and Freedoom Phase 1 are included. Players do not need Docker, Emscripten, Python or a Fabric login for the local app.
+Requirements: Node.js **24**, npm, a modern browser, internet access and a Microsoft-Decision-1 deployment in Microsoft Foundry. The engine and Freedoom Phase 1 are included.
 
 ```sh
 npm ci
@@ -32,7 +32,7 @@ FOUNDRY_DEPLOYMENT=Decision-1
 FOUNDRY_AUTH=entra
 ```
 
-`FOUNDRY_DEPLOYMENT` is your deployment name, which can differ from the catalog model name. The resource origin or the full `/providers/microsoft/v1/systemone` URL is accepted. A Foundry project URL is not accepted.
+Set `FOUNDRY_DEPLOYMENT` to the deployment name configured in Foundry. Set `FOUNDRY_RESOURCE_ENDPOINT` to the resource origin or the full `/providers/microsoft/v1/systemone` endpoint URL.
 
 Sign in with `az login` using an identity with inference access, then:
 
@@ -40,11 +40,11 @@ Sign in with `az login` using an identity with inference access, then:
 npm run dev
 ```
 
-Open **http://127.0.0.1:5173**, click **Launch E1M1**, then **Start AI**. The command starts Vite and a loopback Node API together. Ctrl+C stops both. The model runs in Foundry, not on your computer.
+Open **http://127.0.0.1:5173**, click **Launch E1M1**, then **Start AI**. The command starts Vite and a loopback Node API together. Ctrl+C stops both. Model inference runs in Foundry.
 
 If PowerShell blocks `npm.ps1`, use `npm.cmd` for the commands in this README.
 
-For API-key authentication set `FOUNDRY_AUTH=key` and `FOUNDRY_API_KEY` in `.env.local`. Never add `VITE_` to a credential. Restart the server after configuration changes. Entra access tokens are cached in server memory and refreshed before expiry. They never reach the browser.
+For API-key authentication set `FOUNDRY_AUTH=key` and `FOUNDRY_API_KEY` in `.env.local`. Store credentials in server-side environment variables. Restart the server after configuration changes. Entra access tokens are cached in server memory and refreshed before expiry. Token handling stays on the server.
 
 Production-style local run:
 
@@ -63,7 +63,7 @@ You can use an existing deployment or create your own. The [official Microsoft g
 | --- | --- |
 | Resource | Select an Azure subscription and create a Microsoft Foundry resource and project in the [Foundry portal](https://ai.azure.com/). |
 | Model | Open the model catalog, search for **Microsoft-Decision-1**, and choose **Deploy**. |
-| Capacity | Select a deployment type and capacity supported by your subscription and resource region. Check current availability and quota. A nearby resource does not guarantee a particular inference latency. |
+| Capacity | Select a deployment type and capacity supported by your subscription and resource region. Check availability and quota for the selected region. |
 | Configuration | Name the deployment, for example `Decision-1`. Copy its resource endpoint and deployment name into `.env.local`. |
 | Permissions | Grant the calling identity inference access, such as **Cognitive Services User**. Deployment management requires separate permission, such as **Cognitive Services Contributor**. Sign in to the intended tenant/subscription with Azure CLI and allow time for role propagation. |
 | Connection test | Run `npm run smoke:foundry`. It makes one real, billable call, reports latency and writes a redacted response to ignored `artifacts/foundry-smoke.json`. |
@@ -74,20 +74,20 @@ If the Foundry resource already exists, an equivalent deployment command is:
 az cognitiveservices account deployment create --resource-group YOUR_RESOURCE_GROUP --name YOUR_FOUNDRY_RESOURCE --deployment-name Decision-1 --model-name Microsoft-Decision-1 --model-format Microsoft --model-version 1 --sku-name GlobalStandard --sku-capacity 1
 ```
 
-This command works on PowerShell and POSIX shells. Replace the placeholders and choose a SKU/capacity supported by your subscription. The application uses `POST /providers/microsoft/v1/systemone`. Chat Completions is not a substitute.
+This command works on PowerShell and POSIX shells. Replace the placeholders and choose a SKU/capacity supported by your subscription. The application sends decision requests to `POST /providers/microsoft/v1/systemone`.
 
 ## Playing and inspecting decisions
 
-The included **Freedoom Phase 1 0.13.0 E1M1** is a complete level, but it is not original Doom E1M1. To use the original level, select your own `DOOM1.WAD` before launch. The WAD remains in browser memory and is never uploaded. Reload to change the IWAD. Difficulty defaults to **Hurt Me Plenty**.
+The application includes the complete **Freedoom Phase 1 0.13.0 E1M1** level. To use the original level, select your own `DOOM1.WAD` before launch. The WAD is loaded into browser memory. Reload to change the IWAD. Difficulty defaults to **Hurt Me Plenty**.
 
 * **Start AI / Stop AI:** inference controls versus released input. Stop AI leaves the visible game running.
 * **Manual:** exclusive diagnostic control. WASD moves, left/right arrows turn, Ctrl fires, Space uses doors/switches. AI is stopped first.
 * **Restart:** starts a fresh E1M1 episode and invalidates pending decisions. It does not automatically resume AI.
-* **Hidden tab:** suspends simulation and releases all controls. Resume explicitly. The game never catches up with stale input.
+* **Hidden tab:** suspends simulation and releases all controls. Resume explicitly. Simulation resumes from the paused state.
 * **Audio:** sound effects. MIDI music is not bundled.
-* **Trace:** click a row for its original observation, request/response and execution result. Export JSON or JSONL. This is a decision trace, not video replay or chain-of-thought.
+* **Trace:** click a row for its original observation, request/response and execution result. Export JSON or JSONL. Each record links a model decision to its source observation and executed input.
 
-Observations use engine sensors, not vision. They include visible enemies/items, nearby traversability, inventory, recent effects and visit memory. The model selects all movement, targets and actions. A deterministic executor reaches the selected snapshot heading without tracking targets or choosing a route. Option probabilities are model outputs, not measured chances of winning.
+Observations come from engine sensors. They include visible enemies/items, nearby traversability, inventory, recent effects and visit memory. The model selects all movement, targets and actions. A deterministic executor turns toward the heading selected from the observation snapshot. Option probabilities describe the model’s distribution over the available choices.
 
 ## How it works
 
@@ -126,25 +126,25 @@ The server creates the model prompt and legal choices for the requested channel.
 
 ### Inputs, rendering and observations
 
-The model can choose fine aim (3.5 degrees), normal turns (14 degrees), large scanning turns (45 degrees), or a visible enemy/surface's recorded world point. Scanning uses an absolute heading derived from the source observation. A direction already reached or passed is not replayed. A selected point stays fixed for its lease while the executor compensates the player's own translation each tic. Feedforward uses observed player travel, so renewing a point does not create an artificial target velocity. Moving enemies need another model decision. Rotation is limited to 90 degrees/s and 720 degrees/s², with a 0.5-degree stationary alignment tolerance. `continue_turn` preserves the existing point or scan goal.
+The model can choose fine aim (3.5 degrees), normal turns (14 degrees), large scanning turns (45 degrees), or a visible enemy/surface's recorded world point. Scanning uses an absolute heading derived from the source observation. A direction already reached or passed is not replayed. A selected point stays fixed for its lease while the executor compensates the player's own translation each tic. Feedforward uses observed player travel. Moving enemies need another model decision. Rotation is limited to 90 degrees/s and 720 degrees/s², with a 0.5-degree stationary alignment tolerance. `continue_turn` preserves the existing point or scan goal.
 
-**Three independent HTTP loops** request movement, view and action separately, each using a fresh snapshot. Each channel permits one outstanding request and at most two starts/s, with six starts/s and three outstanding requests in total. Updating view does not cancel movement or fire. Movement/fire leases expire after 650 ms, view after 750 ms. Use/equipment are short pulses. A timeout or invalid response releases only its own channel. The previous combined-action catalog remains only for engine diagnostics.
+**Three independent HTTP loops** request movement, view and action separately, each using a fresh snapshot. Each channel permits one outstanding request and at most two starts/s, with six starts/s and three outstanding requests in total. Updating view does not cancel movement or fire. Movement/fire leases expire after 650 ms, view after 750 ms. Use/equipment are short pulses. A timeout or invalid response releases only its own channel. Engine diagnostics use a separate combined-action catalog.
 
 Simulation stays at 35 tics/s. Rendering runs independently at up to 60 FPS and interpolates only the camera between completed tics. Sensors and hit tests always use actual simulation state. The panel shows FPS, TPS and render time. Exports include p95 frame intervals, render costs and per-channel lease expiry/idle measurements. Input-gap measurements are sampled at simulation tics and reset on level restart.
 
-Exploration memory reports failed movement in the requested direction, recently observed headings at the current location, time without travel, turning without progress and up to four recently seen enemies' last-known bearings. The prompt can use these facts to stop pressing into a wall and inspect a different direction. Enemy memory expires after five seconds and is explicitly stale. Hidden enemies are not revealed. The model still selects every movement and turn.
+Exploration memory reports failed movement in the requested direction, recently observed headings at the current location, time without travel, turning without progress and up to four recently seen enemies' last-known bearings. The prompt uses these observations when requesting the next movement or turn. Enemy memory expires after five seconds; retained entries are marked as last-seen observations.
 
-The current combat prompt favors strafing or retreating while firing with a loaded ranged weapon, and searching after blocked movement or unseen damage. AI forward input is 14 compared with its original 25. AI strafe input is 12 compared with its original 24, reducing lateral bearing changes during firing. Retreat and manual walking retain their speed. Sensors report clearance for the player's box as well as the center ray. Three consecutive failed displacement tics after acceleration release only the blocked movement and display **blocked by collision**. No automatic escape move is inserted. These facts and the prompt help the model choose its next maneuver. Calibration can be run explicitly with `npm run evaluate:navigation` (real, billable Foundry calls).
+The current combat prompt favors strafing or retreating while firing with a loaded ranged weapon, and searching after blocked movement or unseen damage. AI forward input is 14, strafe input is 12 and retreat input is 25. Manual walking uses the engine’s standard movement speed. Sensors report clearance for the player's box as well as the center ray. Three consecutive failed displacement tics after acceleration release only the blocked movement and display **blocked by collision**. The next model decision selects the maneuver using updated collision feedback. Calibration can be run explicitly with `npm run evaluate:navigation` (real, billable Foundry calls).
 
-The decision sidebar keeps the latest available probabilities visible while another request is in flight. Separate groups show **Movement**, **Look & search**, and **Action**. Rows stay in a fixed order. Bars animate to new values, and each group's source observation tic remains visible. Missing scores retain that channel's last scored sample. Three input badges show the independent choices. A small Updating indicator replaces the previous empty-panel refresh.
+The decision sidebar keeps the latest available probabilities visible while another request is in flight. Separate groups show **Movement**, **Look & search**, and **Action**. Rows stay in a fixed order. Bars animate to new values, and each group's source observation tic remains visible. Missing scores retain that channel's last scored sample. Three input badges show the independent choices. An Updating indicator marks requests in flight.
 
-The interaction panel shows visible doors/switches, their state and whether the current use ray reaches them. Observations distinguish closed, opening, passable and closing doors. Colored lock requirements are classified from usable linedefs only after front-side, FOV and line-of-sight filtering, before the first use attempt. This avoids withholding a key requirement behind the missing-key input guard. **Use** is offered only for a ready or closed surface within the use ray, with activation available and no known missing key. It is revalidated before execution, so an old request cannot press use again on an opening door. Accepted use invalidates requests from before activation and obtains fresh observations. An aligned point lease permits use when the camera is actually stationary.
+The interaction panel shows visible doors/switches, their state and whether the current use ray reaches them. Observations distinguish closed, opening, passable and closing doors. Colored lock requirements are classified from usable linedefs only after front-side, FOV and line-of-sight filtering, before the first use attempt. **Use** is offered only for a ready or closed surface within the use ray, with activation available and no known missing key. Execution revalidates the surface state and use conditions. Accepted use invalidates requests from before activation and obtains fresh observations. An aligned point lease permits use when the camera is stationary.
 
-The prompt names blue, yellow and red inventory instead of relying on six anonymous booleans. A card or skull of the matching color satisfies a lock. Visible key sprites are identified by color and kind, and `face_key_ID` offers their recorded direction. A missing-key door is a search requirement rather than a timed mechanism: the model is asked to leave it, inspect accessible passages and collect the key by walking over it. Translation should hold while an off-axis needed key is being aligned. Bounded memory retains up to 16 observed locks and 12 last-seen key locations across turns, with bearings updated only from the player's own position. Acquiring that color updates remembered locks and removes obsolete key clues. Memory resets for a new episode/map and never reveals unseen keys or a route through hidden geometry. `npm run evaluate:keys` tests these conditions against real Foundry inference.
+The prompt lists blue, yellow and red key cards and skull keys in the inventory. A card or skull of the matching color satisfies a lock. Visible key sprites are identified by color and kind, and `face_key_ID` offers their recorded direction. For a locked door with a missing key, the prompt directs the model to inspect accessible passages and collect the matching key by walking over it. Translation should hold while an off-axis needed key is being aligned. Bounded memory retains up to 16 observed locks and 12 last-seen key locations across turns, with bearings updated only from the player's own position. Acquiring that color updates remembered locks and removes obsolete key clues. Memory contains observed locks and key locations and resets for each episode or map. `npm run evaluate:keys` tests these conditions against real Foundry inference.
 
-Decision-1 can choose **wait** to release all controls for up to 600 ms while the world continues. During that wait the controller checks the same observed door every 35 ms and wakes request lanes as soon as it is passable. The next eligible request is reserved for movement, respecting its 2/s limit rather than spending that opportunity on another channel. The model chooses the next move from fresh observations. A wait that became unnecessary during HTTP is rejected without cancelling a pending movement decision. Unrelated doors do not end the wait, and switches retain the bounded timer. The prompt favors passage as soon as there is enough clearance rather than waiting for the full opening animation. After updating, reload the page to load the matching WASM and contracts.
+Decision-1 can choose **wait** to release all controls for up to 600 ms while the world continues. During that wait the controller checks the same observed door every 35 ms and wakes request lanes as soon as it is passable. The next eligible request is reserved for movement, within its 2/s limit. The model chooses the next move from fresh observations. A wait that became unnecessary during HTTP is rejected without cancelling a pending movement decision. Unrelated doors do not end the wait, and switches retain the bounded timer. The prompt favors passage once the opening provides enough clearance.
 
-Default controller settings are six requests/s maximum, one outstanding request per channel, 500 ms observation TTL, 1200 ms timeout and a 15-minute AI session limit. TTL starts at native snapshot capture, not HTTP dispatch. TTL and client timeout can be adjusted before starting AI. The independent server deadline is `DECISION_TIMEOUT_MS`. Exported logs record those settings. Correlation, channel sequence, epoch, episode, selected heading/point and TTL are checked before execution and again at the native tic boundary. Accepted waits require stationary movement/view, invalidate outstanding decisions and pause all three loops for at most 600 ms. Use additionally requires the current use ray to reach an available surface.
+Default controller settings are six requests/s maximum, one outstanding request per channel, 500 ms observation TTL, 1200 ms timeout and a 15-minute AI session limit. TTL starts at native snapshot capture. TTL and client timeout can be adjusted before starting AI. The independent server deadline is `DECISION_TIMEOUT_MS`. Exported logs record those settings. Correlation, channel sequence, epoch, episode, selected heading/point and TTL are checked before execution and again at the native tic boundary. Accepted waits require stationary movement/view, invalidate outstanding decisions and pause all three loops for at most 600 ms. Use additionally requires the current use ray to reach an available surface.
 
 ### Parameters and session data
 
@@ -164,11 +164,11 @@ Default controller settings are six requests/s maximum, one outstanding request 
 | Recent movement history / retained trace | 6 effects / 1,000 records |
 | Enemy memory expiry | 175 simulation tics |
 
-An observation ID identifies an episode and completed tic. Reading the same native snapshot twice does not create a newer timestamp. Movement reports signed progress, blocked tics and its actual termination reason. View reports its selected snapshot heading or point, the direction required from the current player position and measured angular error. A rejection retains its reason instead of appearing as a completed action.
+An observation ID identifies an episode and completed tic. Reading the same native snapshot twice does not create a newer timestamp. Movement reports signed progress, blocked tics and its actual termination reason. View reports its selected snapshot heading or point, the direction required from the current player position and measured angular error. Rejected decisions include a rejection reason in the trace.
 
-JSON export contains session metadata and the bounded trace array. JSONL starts with a metadata record followed by one record per decision. Metadata includes prompt, catalog and engine versions, the IWAD SHA-256, session parameters, transport, final outcome and performance measurements. Opening a trace row shows the source observation, response and execution record. Exported probabilities describe model choices rather than survival confidence.
+JSON export contains session metadata and the bounded trace array. JSONL starts with a metadata record followed by one record per decision. Metadata includes prompt, catalog and engine versions, the IWAD SHA-256, session parameters, transport, final outcome and performance measurements. Opening a trace row shows the source observation, response and execution record. Exported probabilities describe the model’s distribution over available choices.
 
-Credentials and endpoint configuration remain on the server. The local API uses `DefaultAzureCredential` by default, supports explicitly selected API-key authentication and caches Entra tokens until shortly before expiry. The browser sends typed observations rather than arbitrary prompts. Local and Fabric handlers share the same decision validation and inference code. Detailed boundaries are documented in [architecture](docs/architecture.md).
+Credentials and endpoint configuration remain on the server. The local API uses `DefaultAzureCredential` by default, supports explicitly selected API-key authentication and caches Entra tokens until shortly before expiry. The browser sends typed observations; the server constructs the model prompt. Local and Fabric handlers share the same decision validation and inference code. Detailed boundaries are documented in [architecture](docs/architecture.md).
 
 ### Interface
 
@@ -178,7 +178,7 @@ The interface uses orange accents on dark warm surfaces. Layout, responsive rule
 
 | Command | Purpose |
 | --- | --- |
-| `npm run dev` | Local Vite + Node, no Rayfin local services |
+| `npm run dev` | Start Vite and the local Node API |
 | `npm run build` / `npm start` | Build and serve the local application |
 | `npm run clean` | Remove generated builds, temporary cache and browser test output |
 | `npm test` | Contract, parser and scheduler tests without paid inference |
@@ -201,24 +201,24 @@ The interface uses orange accents on dark warm surfaces. Layout, responsive rule
 | `npm run dev:fabric` | Vite connected to a configured remote Fabric backend |
 | `npm run deploy:fabric` | Deploy to the selected Fabric workspace |
 
-For live smoke, `APP_URL`, `LIVE_DURATION_MS` and `LIVE_TTL_MS` customize the target, duration and freshness. `LIVE_RUN_ID` names the output files to preserve earlier runs. For example, `npm run smoke:live -- --duration-ms=30000 --run-id=my-run`. The report includes per-channel latency, native performance, completed heading errors, blocked observations and executed inputs. `node scripts/compare-live.mjs BEFORE.json AFTER.json comparison.json` compares recorded exports without making model calls. Run only against a deployment you are authorized to use. The script writes local traces and screenshots, and fails if no inputs were applied. Evaluations use synthetic observations with real inference and save versioned results. They do not establish gameplay success. CI uses fixtures and browser diagnostics, never paid model calls.
+For live smoke, `APP_URL`, `LIVE_DURATION_MS` and `LIVE_TTL_MS` customize the target, duration and freshness. `LIVE_RUN_ID` names the output files to preserve earlier runs. For example, `npm run smoke:live -- --duration-ms=30000 --run-id=my-run`. The report includes per-channel latency, native performance, completed heading errors, blocked observations and executed inputs. `node scripts/compare-live.mjs BEFORE.json AFTER.json comparison.json` compares recorded exports without making model calls. The script writes local traces and screenshots, and fails if no inputs were applied. Evaluations use synthetic observations with real inference and save versioned results. CI runs fixture-based tests and browser diagnostics.
 
-The interaction diagnostic preserves full Freedoom E1M1 geometry but changes the player spawn to face a door and disables other spawned things to isolate the mechanism. The model chooses all inputs. The test only observes and stops after crossing. This verifies use/wait/pass execution, not autonomous discovery of that door from the normal start or level completion. Diagnostic fixtures are not part of the application bundle.
+The interaction diagnostic preserves full Freedoom E1M1 geometry but changes the player spawn to face a door and disables other spawned things to isolate the mechanism. The model chooses all inputs. The test records use, wait and passage execution, then stops after the player crosses the doorway. Diagnostic fixtures are not part of the application bundle.
 
 `npm run clean -- --dry-run` lists the generated paths selected for cleanup. Stop build and test processes before cleaning. The command removes `dist`, `dist-server`, `dist-fabric`, `rayfin/functions/dist`, `engine/build`, `.cache`, `test-results`, `playwright-report` and the two package inspection ZIPs in `artifacts/`. Recorded measurements in `artifacts/` are local verification evidence and are excluded from Git. Prebuilt WASM, its corresponding source archive, Freedoom data and licenses in `public/` are required application assets.
 
 ## Fabric and implementation details
 
-Follow [Fabric deployment](docs/fabric.md) for identity, secrets, SDK transport, package checks and remote acceptance. Local and Fabric builds use the same decision contract and prompt. Each tab has its own game. Sharing the URL does not share a spectator stream.
+Follow [Fabric deployment](docs/fabric.md) for identity, secrets, SDK transport, package checks and remote acceptance. Local and Fabric builds use the same decision contract and prompt. Each browser tab runs an independent game session.
 
-See [architecture](docs/architecture.md), [engine rebuild](docs/engine-build.md) and [verification](docs/verification.md). Engine source, artifact hashes and dependency lockfiles are included. No original Doom data or Jev code is distributed. See [third-party notices](THIRD_PARTY_NOTICES.md) and [LICENSE](LICENSE).
+See [architecture](docs/architecture.md), [engine rebuild](docs/engine-build.md) and [verification](docs/verification.md). Engine source, artifact hashes and dependency lockfiles are included. Asset provenance and licensing are documented in [third-party notices](THIRD_PARTY_NOTICES.md) and [LICENSE](LICENSE).
 
 ## Troubleshooting
 
 * **Foundry not configured:** edit `.env.local` and restart Node. Health checks do not make model calls.
-* **401/403:** check login, tenant, inference role and resource permissions. A successful local login does not prove the deployed Fabric identity has access.
+* **401/403:** check login, tenant, inference role and resource permissions. For Fabric, check the deployed function’s identity and inference permissions.
 * **404/422:** verify the resource endpoint and exact deployment name.
 * **429:** the controller respects Retry-After and obtains a fresh observation after backoff. Check quota and other callers.
-* **Expired observations:** inspect each channel's p50/p95 and rejected traces before adjusting TTL. Startup latency and steady-state latency differ. The six-request/s cap is not measured throughput. Splitting requests does not guarantee faster Foundry inference and can increase usage/cost.
+* **Expired observations:** inspect each channel's p50/p95 and rejected traces before adjusting TTL. Compare startup and steady-state latency. The controller permits up to six requests/s across three channels; completed throughput depends on inference latency and service limits.
 * **No sound:** launch with a click and enable audio. This build provides sound effects only.
-* **Fabric errors:** remote deployment is unverified until its own smoke test passes. Do not expose unauthenticated inference as a workaround.
+* **Fabric errors:** check the deployed function’s identity, secrets and SDK transport configuration, then run the remote smoke test described in [Fabric deployment](docs/fabric.md).
